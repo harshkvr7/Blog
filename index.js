@@ -123,8 +123,6 @@ app.get("/", async (req, res) => {
 
     var page = req.query.pg || 1;
 
-    console.log(page);
-
     const offset = (page - 1) * 10;
 
     page = parseInt(page);

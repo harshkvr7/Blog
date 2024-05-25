@@ -6,9 +6,7 @@ a{
     color: black;
     text-decoration: none;
 }
-p{
-    margin: 0px;
-}
+
 ::-webkit-scrollbar {
     width: 17px;
     height: 17px;
@@ -140,10 +138,10 @@ a:hover{
 }
 
 .blog-image img{
-    max-width: 100%;
+    width: 100%;
 } 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
     #first-card{
         position: initial;
         padding: 10px;
