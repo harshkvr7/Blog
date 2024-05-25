@@ -104,8 +104,8 @@ form textarea{
     width: 100%;
     height: 50vh;
     border: 1px solid #ebebeb;
-    font-family:"Times New Roman", Times, serif; 
-    font-size: 18px;
+    font-family: "Lato", sans-serif; 
+    font-size: 14px;
 }
 textarea:focus, input:focus{
     outline: 0;
@@ -121,6 +121,8 @@ button{
     background-color: white;
     border: 1px solid #ebebeb;
     padding: 10px;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
 }
 button:hover{
     cursor: pointer;
@@ -180,9 +182,11 @@ a:hover{
   .custom-file-upload {
     border: 1px solid #ebebeb;
     background-color: white;
+    font-size: 14px;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+    font-family: "Lato", sans-serif;
   }
   .custom-file-upload:hover {
     background-color:rgb(233, 233, 233);
