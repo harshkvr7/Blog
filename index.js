@@ -113,9 +113,17 @@ db.query("SELECT * FROM blogs", (err, res) => {
     }
 });
 
+var page = 1;
+
 app.get("/",async (req, res) => 
 {
-    await db.query("SELECT * FROM blogs ORDER BY id desc", (err, res) => {
+    page = req.query.pg || 1;
+
+    if (page < 1) {
+        page = 1;
+    }
+
+    await db.query("SELECT * FROM blogs ORDER BY id desc LIMIT 10 OFFSET ($1 - 1) * 10",[page], (err, res) => {
         if (err) {
             console.error("error executing query", err.stack);
         }
@@ -124,7 +132,7 @@ app.get("/",async (req, res) =>
         }
     });
 
-    await res.render("./main.ejs",{blogs : data});
+    await res.render("./main.ejs",{blogs : data, curr : page});
 })
 
 app.get("/addblog", (req, res) => {
