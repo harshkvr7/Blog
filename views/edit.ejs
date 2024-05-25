@@ -1,7 +1,7 @@
 <%- include("header.ejs") %>
 
 <% if (locals.blog) { %>
-    <div class="blog-container">
+    <div class="blog-container" id="edit-container">
         <form action="/updateblog" method="post">
             <input type="hidden" name="id" value="<%= blog.id %>">
             <textarea name="content"><%= blog.content %></textarea>
@@ -9,7 +9,7 @@
         </form>
     </div>
 <%}else {%>
-<div class="blog-container">
+<div class="blog-container" id="edit-container">
     <form method="post" action="/addblog">
         <textarea name="text" id="text" placeholder="write here."></textarea>
         <button>Add</button>

@@ -3,10 +3,9 @@
     <section class="blog-container">
         <div class="blog-card" id="first-card">
             <img src="./images/3d30df668113fae13d1a381f2ac56a87.jpg" height="35%" width="35%" style="border-radius: 50%;">
-            <div class="content">
+            <div class="content" id="first-text">
                 <h4>HI MY NAME IS HARSH</h4>
                 <p style="font-size: smaller;">18 / developer</p>
-
             </div>
         </div>
 
@@ -14,7 +13,7 @@
             <% const element=blogs[index]; %>
                 <div class="blog-card">
                     <div class="content">
-                        <p><%= element.content %> </p>
+                        <p style="white-space: pre-wrap;"><%= element.content %> </p>
                     </div>
                     <div class="date">
                         <div>
