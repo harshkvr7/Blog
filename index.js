@@ -161,12 +161,11 @@ app.get("/deleteblog",async (req, res) => {
 app.get("/updateblog", async (req, res) => {
     const blogId = req.query.id;
 
-    const result = await db.query("SELECT * FROM blogs WHERE id = $1", [blogId], () => {
-        const blog = result.rows[0];
+    const result = await db.query("SELECT * FROM blogs WHERE id = $1", [blogId]);
+    const blog = result.rows[0];
 
-        res.render("./edit.ejs", { blog : blog });
-    });
-    
+    console.log(blog);
+    res.render("./edit.ejs", { blog : blog });
 });
 
 app.post("/updateblog",async (req, res) => {
