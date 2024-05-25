@@ -6,6 +6,9 @@ a{
     color: black;
     text-decoration: none;
 }
+p{
+    margin: 0px;
+}
 ::-webkit-scrollbar {
     width: 17px;
     height: 17px;
@@ -63,7 +66,7 @@ header{
     position: fixed;
     top: 20vh;
     left: 28vw;
-    padding: 10px;
+    padding: 20px;
     font-family: "Lato", sans-serif;
     font-weight: 500;
 }
@@ -75,15 +78,11 @@ header{
 #first-text p{
     width: auto;
 }
-.blog-card img{
-    padding-top: 10px;
-}
+
 .content{
     width: 100%;
 }
-.content p{
-    width: 100%;
-}
+
 .date{
     padding: 10px;
     width: 100% ;
@@ -139,6 +138,10 @@ a:hover{
     cursor: pointer;
     fill: #353535;
 }
+
+.blog-image img{
+    max-width: 100%;
+} 
 
 @media screen and (max-width: 1200px) {
     #first-card{

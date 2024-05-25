@@ -10,7 +10,8 @@
     </div>
 <%}else {%>
 <div class="blog-container" id="edit-container">
-    <form method="post" action="/addblog">
+    <form method="post" action="/addblog" encType="multipart/form-data">
+        <input type="file" id="pic" name="pic">
         <textarea name="text" id="text" placeholder="write here."></textarea>
         <button>Add</button>
     </form>
