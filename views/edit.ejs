@@ -11,7 +11,10 @@
 <%}else {%>
 <div class="blog-container" id="edit-container">
     <form method="post" action="/addblog" encType="multipart/form-data">
-        <input type="file" id="pic" name="pic">
+        <label for="pic" class="custom-file-upload">
+            Upload Image
+        </label>
+        <input type="file" id="pic" name="pic" accept="image/*">
         <textarea name="text" id="text" placeholder="write here."></textarea>
         <button>Add</button>
     </form>

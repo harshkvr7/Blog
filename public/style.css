@@ -98,6 +98,7 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 form textarea{
     width: 100%;
@@ -120,14 +121,12 @@ button{
     background-color: white;
     border: 1px solid #ebebeb;
     padding: 10px;
-    margin-top: 20px;
 }
 button:hover{
     cursor: pointer;
     background-color: rgb(233, 233, 233);
     border: 1px solid #ebebeb;
     padding: 10px;
-    margin-top: 20px;
 }
 a{
     fill: #909090;
@@ -173,4 +172,18 @@ a:hover{
     font-family: "Lato", sans-serif;
     gap: 10px;
     padding-bottom: 20px;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-upload {
+    border: 1px solid #ebebeb;
+    background-color: white;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .custom-file-upload:hover {
+    background-color:rgb(233, 233, 233);
   }
