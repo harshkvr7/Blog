@@ -104,7 +104,7 @@ db.connect();
 
 var data;
 
-db.query("SELECT * FROM blogs", (err, res) => {
+db.query("SELECT * FROM blogs ORDER BY id desc LIMIT 10 OFFSET ($1 - 1) * 10",[1], (err, res) => {
     if (err) {
         console.error("error executing query", err.stack);
     }
@@ -113,27 +113,30 @@ db.query("SELECT * FROM blogs", (err, res) => {
     }
 });
 
-var page = 1;
 
-app.get("/",async (req, res) => 
-{
-    page = req.query.pg || 1;
+app.get("/", async (req, res) => {
+    const blogCountResult = await db.query("SELECT COUNT(id) as count from blogs;");
+    const blogCount = blogCountResult.rows[0].count;
 
-    if (page < 1) {
-        page = 1;
-    }
+    var page = req.query.pg || 1; 
 
-    await db.query("SELECT * FROM blogs ORDER BY id desc LIMIT 10 OFFSET ($1 - 1) * 10",[page], (err, res) => {
+    console.log(page);
+
+    const offset = (page - 1) * 10;
+
+    page = parseInt(page);
+
+    const totalPages = Math.ceil(blogCount / 10);
+
+    await db.query("SELECT * FROM blogs ORDER BY id desc LIMIT 10 OFFSET $1", [offset], (err, result) => {
         if (err) {
             console.error("error executing query", err.stack);
-        }
-        else{
-            data = res.rows;
+        } else {
+            const data = result.rows;
+            res.render("./main.ejs", { blogs: data, curr: page, max: totalPages });
         }
     });
-
-    await res.render("./main.ejs",{blogs : data, curr : page});
-})
+});
 
 app.get("/addblog", (req, res) => {
     res.render("./edit.ejs");
@@ -142,35 +145,36 @@ app.get("/addblog", (req, res) => {
 app.post("/addblog",async (req, res) => {
     var date_time = get_date_time();
 
-    await db.query("INSERT INTO blogs (content, date, month) VALUES ($1, $2, $3)",[req.body.text, date_time.date, date_time.month]);
-    
-    res.redirect("/");
+    await db.query("INSERT INTO blogs (content, date, month) VALUES ($1, $2, $3)",[req.body.text, date_time.date, date_time.month], () => {
+        res.redirect("/");
+    });
 })
 
 app.get("/deleteblog",async (req, res) => {
     const blogId = req.query.id;
 
-    await db.query("DELETE FROM blogs WHERE id = $1", [blogId]);
-
-    res.redirect("/");
+    await db.query("DELETE FROM blogs WHERE id = $1", [blogId], () => {
+        res.redirect("/");
+    });
 })
 
 app.get("/updateblog", async (req, res) => {
     const blogId = req.query.id;
 
-    const result = await db.query("SELECT * FROM blogs WHERE id = $1", [blogId]);
-    const blog = result.rows[0];
+    const result = await db.query("SELECT * FROM blogs WHERE id = $1", [blogId], () => {
+        const blog = result.rows[0];
 
-    console.log(blog);
-    res.render("./edit.ejs", { blog : blog });
+        res.render("./edit.ejs", { blog : blog });
+    });
+    
 });
 
 app.post("/updateblog",async (req, res) => {
     const { id, content } = req.body;
 
-    await db.query("UPDATE blogs SET content = $1 WHERE id = $2", [content, id]);
-    
-    res.redirect("/");
+    await db.query("UPDATE blogs SET content = $1 WHERE id = $2", [content, id], () => {
+        res.redirect("/");
+    });
 })
 
 app.listen(port, () => {
